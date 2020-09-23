@@ -15,6 +15,7 @@
 		EA550372251AED8C0076FAF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA550370251AED8C0076FAF6 /* LaunchScreen.storyboard */; };
 		EA55037D251AED8C0076FAF6 /* FullScreenCameraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA55037C251AED8C0076FAF6 /* FullScreenCameraTests.swift */; };
 		EA550388251AED8C0076FAF6 /* FullScreenCameraUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA550387251AED8C0076FAF6 /* FullScreenCameraUITests.swift */; };
+		EA55039D251B18C80076FAF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA55039C251B18C80076FAF6 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		EA550383251AED8C0076FAF6 /* FullScreenCameraUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FullScreenCameraUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA550387251AED8C0076FAF6 /* FullScreenCameraUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenCameraUITests.swift; sourceTree = "<group>"; };
 		EA550389251AED8C0076FAF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA55039C251B18C80076FAF6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				EA550369251AED880076FAF6 /* CameraController.swift */,
+				EA55039C251B18C80076FAF6 /* ViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 			files = (
 				EA55036A251AED880076FAF6 /* CameraController.swift in Sources */,
 				EA550366251AED880076FAF6 /* AppDelegate.swift in Sources */,
+				EA55039D251B18C80076FAF6 /* ViewController.swift in Sources */,
 				EA550368251AED880076FAF6 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

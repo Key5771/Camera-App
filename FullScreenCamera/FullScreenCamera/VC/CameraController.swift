@@ -9,20 +9,41 @@ import UIKit
 import AVFoundation
 
 class CameraController: UIViewController {
+    // #1
     var captureSession: AVCaptureSession?
+    
+    // #2
     var frontCamera: AVCaptureDevice?
     var rearCamera: AVCaptureDevice?
+    
+    // #3
     var currentCameraPosition: CameraPosition?
     var frontCameraInput: AVCaptureDeviceInput?
     var rearCameraInput: AVCaptureDeviceInput?
+    
+    // #4
     var photoOutput: AVCapturePhotoOutput?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    
+    // preview
+    var previewLayer: AVCaptureVideoPreviewLayer?
+    
+    
+    // Preview display
+    func displayPreview(on view: UIView) throws {
+        guard let captureSession = self.captureSession, captureSession.isRunning else {
+            throw CameraControllerError.captureSessionIsMissing
+        }
+        
+        self.previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        self.previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        self.previewLayer?.connection?.videoOrientation = .portrait
+        
+        view.layer.insertSublayer(self.previewLayer!, at: 0)
+        self.previewLayer?.frame = view.frame
     }
 }
 
+// MARK: - Error & Position enum
 extension CameraController {
     enum CameraControllerError: Swift.Error {
         case captureSessionAlreadyRunning
@@ -39,14 +60,15 @@ extension CameraController {
     }
 }
 
+// MARK: - Camera 동작 기능
 extension CameraController {
     func prepare(completionHandler: @escaping (Error?) -> Void) {
-        // Creating a capture session
+        // #1 : Creating a capture session
         func createCaptureSession() {
             self.captureSession = AVCaptureSession()
         }
         
-        // Obtaining and configuring the necessary capture devices
+        // #2 : Obtaining and configuring the necessary capture devices
         func configureCaptureDevices() throws {
             let session = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .unspecified)
             guard let cameras = (session?.constituentDevices.compactMap { $0 }), !cameras.isEmpty else {
@@ -68,7 +90,7 @@ extension CameraController {
             }
         }
         
-        // Creating inputs using the capture devices
+        // #3 : Creating inputs using the capture devices
         func configureDeviceInputs() throws {
             guard let captureSession = self.captureSession else {
                 throw CameraControllerError.captureSessionIsMissing
@@ -97,7 +119,7 @@ extension CameraController {
             }
         }
         
-        // Configuring a photo output object to process captured images
+        // #4 : Configuring a photo output object to process captured images
         func configurePhotoOutput() throws {
             guard let captureSession = self.captureSession else {
                 throw CameraControllerError.captureSessionIsMissing
