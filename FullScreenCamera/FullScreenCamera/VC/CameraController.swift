@@ -16,7 +16,14 @@ class CameraController: UIViewController {
     var frontCameraInput: AVCaptureDeviceInput?
     var rearCameraInput: AVCaptureDeviceInput?
     var photoOutput: AVCapturePhotoOutput?
-    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+    }
+}
+
+extension CameraController {
     enum CameraControllerError: Swift.Error {
         case captureSessionAlreadyRunning
         case captureSessionIsMissing
@@ -30,12 +37,9 @@ class CameraController: UIViewController {
         case front
         case rear
     }
+}
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-    
+extension CameraController {
     func prepare(completionHandler: @escaping (Error?) -> Void) {
         // Creating a capture session
         func createCaptureSession() {
@@ -128,7 +132,5 @@ class CameraController: UIViewController {
             }
         }
     }
-
-
 }
 
