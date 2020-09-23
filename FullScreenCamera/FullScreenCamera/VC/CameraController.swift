@@ -10,6 +10,17 @@ import AVFoundation
 
 class CameraController: UIViewController {
     var captureSession: AVCaptureSession?
+    var frontCamera: AVCaptureDevice?
+    var rearCamera: AVCaptureDevice?
+    
+    enum CameraControllerError: Swift.Error {
+        case captureSessionAlreadyRunning
+        case captureSessionIsMissing
+        case inputsAreInvalid
+        case invalidOperation
+        case noCamerasAvailable
+        case unknown
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +34,26 @@ class CameraController: UIViewController {
         }
         
         // Obtaining and configuring the necessary capture devices
-        func configureCaptureDevices() throws { }
+        func configureCaptureDevices() throws {
+            let session = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .unspecified)
+            guard let cameras = (session?.constituentDevices.compactMap { $0 }), !cameras.isEmpty else {
+                throw CameraControllerError.noCamerasAvailable
+            }
+            
+            for camera in cameras {
+                if camera.position == .front {
+                    self.frontCamera = camera
+                }
+                
+                if camera.position == .back {
+                    self.rearCamera = camera
+                    
+                    try camera.lockForConfiguration()
+                    camera.focusMode = .continuousAutoFocus
+                    camera.unlockForConfiguration()
+                }
+            }
+        }
         
         // Creating inputs using the capture devices
         func configureDeviceInputs() throws { }
