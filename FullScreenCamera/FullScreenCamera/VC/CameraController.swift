@@ -12,6 +12,9 @@ class CameraController: UIViewController {
     var captureSession: AVCaptureSession?
     var frontCamera: AVCaptureDevice?
     var rearCamera: AVCaptureDevice?
+    var currentCameraPosition: CameraPosition?
+    var frontCameraInput: AVCaptureDeviceInput?
+    var rearCameraInput: AVCaptureDeviceInput?
     
     enum CameraControllerError: Swift.Error {
         case captureSessionAlreadyRunning
@@ -20,6 +23,11 @@ class CameraController: UIViewController {
         case invalidOperation
         case noCamerasAvailable
         case unknown
+    }
+    
+    public enum CameraPosition {
+        case front
+        case rear
     }
 
     override func viewDidLoad() {
@@ -56,7 +64,33 @@ class CameraController: UIViewController {
         }
         
         // Creating inputs using the capture devices
-        func configureDeviceInputs() throws { }
+        func configureDeviceInputs() throws {
+            guard let captureSession = self.captureSession else {
+                throw CameraControllerError.captureSessionIsMissing
+            }
+            
+            if let rearCamera = self.rearCamera {
+                self.rearCameraInput = try AVCaptureDeviceInput(device: rearCamera)
+                
+                if captureSession.canAddInput(self.rearCameraInput!) {
+                    captureSession.addInput(self.rearCameraInput!)
+                }
+                
+                self.currentCameraPosition = .rear
+            } else if let frontCamera = self.frontCamera {
+                self.frontCameraInput = try AVCaptureDeviceInput(device: frontCamera)
+                
+                if captureSession.canAddInput(self.frontCameraInput!) {
+                    captureSession.addInput(self.frontCameraInput!)
+                } else {
+                    throw CameraControllerError.inputsAreInvalid
+                }
+                
+                self.currentCameraPosition = .front
+            } else {
+                throw CameraControllerError.noCamerasAvailable
+            }
+        }
         
         // Configuring a photo output object to process captured images
         func configurePhotoOutput() throws { }
