@@ -1,24 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FullScreenCamera" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o2g-OI-uMn">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GL2-6p-rrC">
+                                        <rect key="frame" x="177" y="698" width="60" height="60"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="1Op-xf-euJ"/>
+                                            <constraint firstAttribute="height" constant="60" id="can-ik-MWb"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="captureImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v6D-Bj-Uds"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLc-iR-Q67">
+                                        <rect key="frame" x="30" y="738" width="70" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="CEe-Pw-CrY"/>
+                                            <constraint firstAttribute="width" constant="70" id="KFj-v4-SpB"/>
+                                        </constraints>
+                                        <state key="normal" title="Video">
+                                            <color key="titleColor" name="AccentColor"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hrq-xG-pS4">
+                                        <rect key="frame" x="30" y="678" width="70" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="XhU-Ug-c2D"/>
+                                            <constraint firstAttribute="width" constant="70" id="oMa-wB-iEv"/>
+                                        </constraints>
+                                        <state key="normal" title="Camera">
+                                            <color key="titleColor" name="AccentColor"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="MLc-iR-Q67" firstAttribute="top" secondItem="Hrq-xG-pS4" secondAttribute="bottom" constant="10" id="KFh-Hm-ABy"/>
+                                    <constraint firstAttribute="bottom" secondItem="GL2-6p-rrC" secondAttribute="bottom" constant="60" id="Lad-q0-bhN"/>
+                                    <constraint firstAttribute="bottom" secondItem="MLc-iR-Q67" secondAttribute="bottom" constant="30" id="YGK-ZO-Kfb"/>
+                                    <constraint firstItem="MLc-iR-Q67" firstAttribute="leading" secondItem="o2g-OI-uMn" secondAttribute="leading" constant="30" id="aTy-lV-RJM"/>
+                                    <constraint firstItem="Hrq-xG-pS4" firstAttribute="leading" secondItem="o2g-OI-uMn" secondAttribute="leading" constant="30" id="dBm-0G-ucN"/>
+                                    <constraint firstItem="GL2-6p-rrC" firstAttribute="centerX" secondItem="o2g-OI-uMn" secondAttribute="centerX" id="eeh-QN-4z3"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="o2g-OI-uMn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7ue-v0-9pr"/>
+                            <constraint firstItem="o2g-OI-uMn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="9NQ-mh-EGy"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="o2g-OI-uMn" secondAttribute="trailing" id="Q9S-BQ-0Gc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="o2g-OI-uMn" secondAttribute="bottom" id="ysG-0b-hW2"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="captureButton" destination="GL2-6p-rrC" id="mvs-yQ-v0g"/>
+                        <outlet property="capturePreviewView" destination="o2g-OI-uMn" id="Guw-wH-1Rt"/>
+                        <outlet property="photoModeButton" destination="Hrq-xG-pS4" id="5Ur-3X-Eza"/>
+                        <outlet property="videoModeButton" destination="MLc-iR-Q67" id="35X-20-lEA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="73.660714285714278"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
