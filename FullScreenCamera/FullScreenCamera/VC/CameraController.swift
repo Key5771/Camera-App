@@ -15,6 +15,7 @@ class CameraController: UIViewController {
     var currentCameraPosition: CameraPosition?
     var frontCameraInput: AVCaptureDeviceInput?
     var rearCameraInput: AVCaptureDeviceInput?
+    var photoOutput: AVCapturePhotoOutput?
     
     enum CameraControllerError: Swift.Error {
         case captureSessionAlreadyRunning
@@ -93,7 +94,20 @@ class CameraController: UIViewController {
         }
         
         // Configuring a photo output object to process captured images
-        func configurePhotoOutput() throws { }
+        func configurePhotoOutput() throws {
+            guard let captureSession = self.captureSession else {
+                throw CameraControllerError.captureSessionIsMissing
+            }
+            
+            self.photoOutput = AVCapturePhotoOutput()
+            self.photoOutput!.setPreparedPhotoSettingsArray([AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])], completionHandler: nil)
+            
+            if captureSession.canAddOutput(self.photoOutput!) {
+                captureSession.addOutput(self.photoOutput!)
+            }
+            
+            captureSession.startRunning()
+        }
         
         DispatchQueue(label: "prepare").async {
             do {
